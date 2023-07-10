@@ -4,6 +4,7 @@
     padding-top: 100px;
 }
 body{
+    font-family: 'Josefin Sans', sans-serif;
     text-align: center;
     background-color: var(--primary-color);
     background-image: var(--background-image);
@@ -14,36 +15,199 @@ form{
     text-align: center;
 }
 input[type=text]{
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: 400;
+        padding-left: 15px;
+        padding-right: 15px;
+        color: var(--box-text);
+        background-color: var(--box);
         border-radius: 5px;
-        width: 100%;
+        width: 95%;
         height: 50px;
+        
 }
 
 :root{
-    --primary-color: #fff;
+    --primary-color: hsl(0, 0%, 98%);
     --secondary-color: black;
     --background-image: url("images/bg-desktop-light.jpg");
+    --secondary-background-image: url("images/bg-mobile-light.jpg");
+    --footer: hsl(236, 9%, 61%);
+    --box: #fff;
+    --box-text: hsl(235, 19%, 35%);
+    --checked-text: hsl(236, 9%, 61%);
 }  
 
 .dark-theme{
-    --primary-color: #000;
+    --primary-color: hsl(235, 21%, 11%);
     --secondary-color: #fff;
     --background-image: url("images/bg-desktop-dark.jpg");
+    --secondary-background-image: url("images/bg-mobile-dark.jpg");
+    --footer: hsl(233, 14%, 35%);
+    --box: hsl(235, 24%, 19%);
+    --box-text: hsl(234, 39%, 85%);
+    --checked-text: hsl(233, 14%, 35%);
 }
 
+/* CSS media queries to change bg-image on screen size */
+@media (max-width: 375px) {
+    body {
+        background-image: var(--secondary-background-image);
+    }
+  }
+
 .box{
-    box-shadow: 1px 1px 10px rgb(194, 193, 193);;
+    box-shadow: 1px 1px 10px rgb(194, 193, 193);
     position: absolute;
+    text-align: left;
+    margin-bottom: 15px;
     width: 40%;
-    background: var(--primary-color);
+    background: var(--box);
     height: fit-content;
+    border-radius: 5px;
+    color: var(--box-text)
+    
+}
+
+footer{
+    margin-top: 50%;
+    position: sticky;
+    text-align: center;
+    font-weight: 400;
+    color: var(--footer);
+
+    margin-bottom: 5px;
 }
 
 
 .todo{
+    display: flex;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     color: #fff;
     font-size: 30px;
     font-weight: 700;
 }
+
+
+ul li{
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+}
+
+ul li::before{
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    border: 1.5px solid;
+    border-color: gray;
+    background-size: cover;
+    background-position: center;
+    top: 12px;
+    left: 8px;
+}
+
+ul li::before:hover{
+    border-color: blue;
+}
+
+
+ul li.checked{
+    color: var(--checked-text);
+    text-decoration: line-through;
+
+}
+
+ul li.checked::before{
+   color: linear-gradient hsl(192, 100%, 67%);
+    background-image: linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    /* z-index: 0; */
+    background: url(images/icon-check.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  
+}
+
+ul li span{
+    position: absolute;
+    right: 0;
+    /*padding-right: 15px;*/
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+ul li span:hover{
+    background: #edeef0;
+}
+
+/* .circle{
+    width: 30px;
+    height: 30px;
+    background-color: gray;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .circle:hover{
+    background-image: linear-gradient(to bottom, red, blue);
+  } */
+
+
+  .circle {
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid;
+    border-color: red;
+    border-radius: 50%;
+    transition: border-color 0.3s ease;
+    /* box-sizing: border-box; */
+  }
+  
+  .circle:hover {
+    /* border-radius: 50%;
+    box-sizing: border-box;
+    border: blue;*/
+    border-color: linear-gradient(to bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    /*  */
+   /* border-image-slice: 1;
+    border-color: transparent; */
+  }
+/* 
+  .circle {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .circle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid gray;
+    border-radius: 50%;
+  }
+  
+  .circle:hover::before {
+    border-image: linear-gradient(to bottom, red, blue);
+    border-image-slice: 1;
+    border-color: transparent;
+  }
+  
+  
+  
+   */

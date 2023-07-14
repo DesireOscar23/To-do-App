@@ -36,6 +36,8 @@ input[type=text]{
     --box: #fff;
     --box-text: hsl(235, 19%, 35%);
     --checked-text: hsl(236, 9%, 61%);
+    --filters: hsl(236, 9%, 61%);
+    --filters-hover: hsl(235, 19%, 35%);
 }  
 
 .dark-theme{
@@ -47,10 +49,12 @@ input[type=text]{
     --box: hsl(235, 24%, 19%);
     --box-text: hsl(234, 39%, 85%);
     --checked-text: hsl(233, 14%, 35%);
+    --filters:  hsl(233, 11%, 84%);
+    --filters-hover: hsl(234, 39%, 85%);
 }
 
 /* CSS media queries to change bg-image on screen size */
-@media (max-width: 768px) {
+@media (max-width: 375px) {
     body {
         background-image: var(--secondary-background-image);
     }
@@ -74,13 +78,11 @@ input[type=text]{
     background: var(--box);
     height: fit-content;
     border-radius: 5px;
-    color: var(--box-text);
-   
-    
+    color: var(--box-text);  
 }
 
 footer{
-    margin-top: 50%;
+    margin-top: 60%;
     position: sticky;
     text-align: center;
     font-weight: 400;
@@ -113,6 +115,7 @@ ul li{
     cursor: pointer;
     position: relative;
     border-bottom: 1px solid #ccc;
+    height: 35px;
 }
 
 ul li::before{
@@ -122,18 +125,16 @@ ul li::before{
     width: 20px;
     border-radius: 50%;
     border: 1.5px solid;
-    border-color: gray;
+    border-color: hsl(236, 33%, 92%);
     background-size: cover;
     background-position: center;
     top: 12px;
     left: 0px;
     margin-left: -19px;
-    /* border-bottom: 1px solid #ccc; */
 }
 
 ul li:hover::before{
-  /* background-image: linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%)); */
-  border-color:  hsl(280, 87%, 65%);
+ border-color:  hsl(280, 87%, 65%);
 }
 
 
@@ -146,38 +147,17 @@ li.checked::before {
   content: "";
   display: inline-block;
   position: absolute;
-  /* top: 0;
-  left: 0; */
- 
   width: 20px; 
   height: 20px; 
   background-color: hsl(280, 87%, 65%);
-  background-image: url("images/icon-check.svg");
+  background-image: url(images/icon-check.svg);
   background-repeat: no-repeat;
   background-position: absolute;
 }
 
-/* ul li.checked::before{    
-  background-image: linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%), url("images/icon-check.svg"));
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}  */
-
-
-/* ul li.checked::before a{
-  background: url(images/icon-check.svg);
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-} */
-
 ul li span{
     position: absolute;
     right: 0;
-    /*padding-right: 15px;*/
     top: 5px;
     width: 35px;
     height: 35px;
@@ -190,6 +170,20 @@ ul li span{
 .down-items{
   display: flex;
   font-size: small;
-  var(--footer);
+  color: var(--footer);
 }
 
+.sorters{
+  text-align: center; 
+  display: flex; 
+  margin-left:30px;
+  color: var(--filters);
+}
+
+.sorters:hover{
+  color: var(--filters-hover);
+}
+
+.sorters:active{
+  color: blue;
+}

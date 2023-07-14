@@ -57,9 +57,6 @@ showData();
 /********************** DELETE AN ITEM FROM THE LIST *****************/
 var i = 1;
 listContainer.addEventListener("click", function(e){
-  // var cross = document.getElementsByTagName("SPAN");
-  // this.onmouseover(cross = ''); 
-  // this.onmouseout(cross = '');
     if(e.target.tagName === "LI"){
         e.target.classList.toggle("checked");
         saveData();
@@ -145,7 +142,6 @@ addEventListeners();
 
 
 function sort(){
-// const myList = document.getElementById('myList');
 const listItemsort = Array.from(listContainer.getElementsByTagName('li'));
 
 listItemsort.sort(function(a, b) {

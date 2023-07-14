@@ -6,7 +6,6 @@
         <link rel="stylesheet" type="text/css" href="main.css">
         <script src="main.js" defer></script> 
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
-        <link href="https://fonts.google.com/specimen/Josefin+Sans" rel="stylesheet">
 
     </head>
     <body>
@@ -38,11 +37,11 @@
                 <div id="itemCount" style="margin-left:20px">
                     Items left
                 </div>
-            <section style="text-align: center; display: flex; margin-left:30px; color: var(--footer);">
+            <section class="sorters">
                 <div style="padding-left: 40px; cursor: pointer" onclick="sort()" >
                     All
                 </div>
-                <div style="padding-left: 10px;">
+                <div style="padding-left: 10px; cursor: pointer">
                     Active
                 </div>
                 <div style="padding-left: 10px;cursor: pointer" onclick="sortCompleted()">
@@ -59,7 +58,7 @@
         <footer>
             
             <p>Drag and drop to reorder list.</p>
-            <div class="">
+            
             </div>
         </footer>
     </div>

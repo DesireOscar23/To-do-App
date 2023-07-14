@@ -3,7 +3,7 @@ var icon = document.getElementById("icon");
 
 icon.onclick = function(){
     document.body.classList.toggle("dark-theme");
-/******** CHANGE BG-IMAGE ON SMALL SCREENS *****************/
+    /******** CHANGE BG-IMAGE ON SMALL SCREENS *****************/
     if(window.innerWidth <= 375){
         document.body.classList("--secondary-background-image");
     }
@@ -23,29 +23,23 @@ icon.onclick = function(){
     const listContainer = document.getElementById("list-container");
 
 function add(){
-    /*var x = document.forms["add"]["todo"].value;
-    if(x === ''){
-        alert("Please write a task!");
-    }
-    else{
-        let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
-        listContainer.appendChild(li);
-    }*/
-
+   
     if(inputBox.value == ''){
         window.alert("Please write a task!");
     }
     else{
         let li = document.createElement("li");
         li.innerHTML = inputBox.value;
+        li.draggable="true";
         listContainer.appendChild(li);
-
+        
+        
         let span = document.createElement('span');
         span.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="#494C6B" fill-rule="evenodd" d="M16.97 0l.708.707L9.546 8.84l8.132 8.132-.707.707-8.132-8.132-8.132 8.132L0 16.97l8.132-8.132L0 .707.707 0 8.84 8.132 16.971 0z"/></svg>';
         li.appendChild(span);
 
         inputBox.value = '';
+        updateItemCount();
         saveData();
     }
 }
@@ -60,15 +54,121 @@ function showData(){
 }
 showData();
 
-/********************** Delete an item from the list *****************/
-
+/********************** DELETE AN ITEM FROM THE LIST *****************/
+var i = 1;
 listContainer.addEventListener("click", function(e){
+  // var cross = document.getElementsByTagName("SPAN");
+  // this.onmouseover(cross = ''); 
+  // this.onmouseout(cross = '');
     if(e.target.tagName === "LI"){
         e.target.classList.toggle("checked");
         saveData();
     }
     else if(e.target.tagName === "SPAN")
     e.target.parentElement.remove();
+    updateItemCount();
     saveData();
 }, false);
+
+function clearCompleted(){
+   
+        if(listContainer == this.classList.toggle("checked")){
+          this.classList.toggle("checked").remove();
+            updateItemCount();
+            saveData();
+        
+    };
+    }
   
+// *********** DRAG AND DROP, AND COUNT ITEMS *****************
+
+const itemCount = document.getElementById('itemCount');
+
+let dragSrcElement = null;
+
+function handleDragStart(e) {
+  dragSrcElement = this;
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/html', this.innerHTML);
+  saveData();
+}
+
+function handleDragOver(e) {
+  if (e.preventDefault) {
+    e.preventDefault();
+    saveData();
+  }
+  e.dataTransfer.dropEffect = 'move';
+  return false;
+}
+
+function handleDrop(e) {
+  if (e.stopPropagation) {
+    e.stopPropagation();
+    saveData();
+  }
+  if (dragSrcElement !== this) {
+    dragSrcElement.innerHTML = this.innerHTML;
+    this.innerHTML = e.dataTransfer.getData('text/html');
+    saveData();
+  }
+  updateItemCount();
+  return false;
+}
+
+function handleDragEnd() {
+  Array.from(listContainer.children).forEach(function (listItem) {
+    listItem.classList.remove('dragging');
+  });
+  saveData();
+}
+
+function updateItemCount() {
+  const count = listContainer.children.length;
+  itemCount.textContent = `${count} Items left`;
+  saveData();
+}
+
+function addEventListeners() {
+  const listItems = listContainer.querySelectorAll('li');
+  listItems.forEach(function (listItem) {
+    listItem.addEventListener('dragstart', handleDragStart, false);
+    listItem.addEventListener('dragover', handleDragOver, false);
+    listItem.addEventListener('drop', handleDrop, false);
+    listItem.addEventListener('dragend', handleDragEnd, false);
+    saveData();
+  });
+  updateItemCount();
+}
+
+addEventListeners();
+
+
+function sort(){
+// const myList = document.getElementById('myList');
+const listItemsort = Array.from(listContainer.getElementsByTagName('li'));
+
+listItemsort.sort(function(a, b) {
+  return a.textContent.localeCompare(b.textContent);
+});
+
+listItemsort.forEach(function(item) {
+  listContainer.appendChild(item);
+});
+saveData();
+}
+function sortCompleted(){
+const listItemsort = Array.from(myList.getElementsByTagName('li'));
+
+listItemsort.sort(function(a, b) {
+  const attrA = a.getAttribute('data-value');
+  const attrB = b.getAttribute('data-value');
+  return attrA.localeCompare(attrB);
+});
+
+listItemsort.forEach(function(item) {
+  listContainer.appendChild(item);
+});
+
+}
+

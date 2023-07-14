@@ -24,4 +24,4 @@ To use the To-Do App locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/to-do-app.git
+   git clone https://github.com/DesireOscar23/To-do-App.git
